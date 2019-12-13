@@ -1,0 +1,25 @@
+#launchtabelle {
+    width: 100%;
+}
+#launchtabelle td {
+    vertical-align: top;
+}
+#launchtabelle .true, .successful {
+    background-color: lightgreen;
+}
+#launchtabelle .false, .unsuccessful {
+    background-color: pink;
+}
+#launchtabelle .zukunft, .upcoming {
+    background-color: lightblue;
+}
+.patchimage {
+    width: 100px;
+}
+.legend {
+    padding: 0.5rem; 
+    border: solid 1px gray;
+}
+#zusammenfassung-container {
+    padding: 1.2rem;
+}

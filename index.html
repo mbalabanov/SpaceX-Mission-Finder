@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Space X Mission Finder</title>
+        <meta name="description" content="SpaceX Mission Finder: All Falcon Rocket Launches">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+      
+        <link href="css/one-page-wonder.css" rel="stylesheet">
+        <link href="css/custom.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+
+    </head>
+    <body>
+
+        
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">SpaceX Mission Finder</a>
+    </div>
+  </nav>
+
+  <header class="masthead text-center text-white">
+    <div class="masthead-content">
+      <div class="container">
+        <h1 class="masthead-heading mb-0">SpaceX</h1>
+        <h2 class="masthead-subheading mb-0">All Launch Missions</h2>
+        <a href="#missionfinder" class="btn btn-primary btn-xl rounded-pill mt-5">Search missions</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="missionfinder">
+    <div class="row">
+      <div class="col-lg-12">
+          <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@spacex?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from SpaceX"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">SpaceX</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row px-2">
+        <div class="col-lg-12">
+          <p>&nbsp;</p>
+          <p><img src="img/spacex-logo.png" id="spacexlogo"></p>
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <h4>Filters</h4>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="startjahr">Launch Year</label>
+            </div>
+            <select class="custom-select" id="startjahr">
+              <option value="alle">All</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="raketenname">Rocket</label>
+            </div>
+            <select class="custom-select" id="raketenname">
+              <option value="alle">All</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="startplatz">Launch Site</label>
+            </div>
+            <select class="custom-select" id="startplatz">
+              <option value="alle">All</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-5">
+            <h4>Summary</h4>
+            <div class="alert alert-info" id="zusammenfassung-container" role="alert">
+            <p><span id="zusammenfassung"></span></p>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <h4>Color Coding</h4>
+          <div class="alert successful">&nbsp;Successful&nbsp;</div>
+          <div class="alert unsuccessful">&nbsp;Unsuccessful&nbsp;</div>
+          <div class="alert upcoming">&nbsp;Not yet launched&nbsp;</div>
+        </div>
+      </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+
+          <h4 class="text-center">Missions</h4>
+          <table id="launchtabelle" class="table">
+            <thead>
+                <tr>
+                    <th width="10%">Mission Patch</th>
+                    <th width="10%">Launch Year</th>
+                    <th width="10%">Date</th>
+                    <th width="25%">Description</th>
+                    <th width="15%">Rocket Name</th>
+                    <th width="15%">Launch Site</th>
+                    <th width="10%">Payload</th>
+                    <th width="5%">Success</th>
+                </tr>
+            </thead>
+            <tbody id="tabelleninhalt">
+              <tr>
+                <td colspan="8" class="text-center">
+                  <p>&nbsp;</p>
+                  <h3>The mission table is being generated.</h3>
+                  <img src="img/spinner.gif" alt="Table is being generated.">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5 order-lg-2">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" src="img/spacex-rocket-launching.jpg" alt="Eine SpaceX Rakete beim Start">
+          </div>
+        </div>
+        <div class="col-lg-7 order-lg-1">
+          <div class="p-5">
+            <h2 class="display-4">About SpaceX</h2>
+            <p>Space Exploration Technologies Corp. is a private American aerospace manufacturer and space transportation services company headquartered in Hawthorne, California. It was founded in 2002 by Elon Musk with the goal of reducing space transportation costs to enable the colonization of Mars. SpaceX has developed the Falcon launch vehicle family and the Dragon spacecraft family. <br><em>From Wikipedia (<a href="https://de.wikipedia.org/wiki/SpaceX" target="_blank">SpaceX</a>)</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-black">
+    <div class="container">
+        <p class="m-0 text-center text-white small">Marin Balabanov.<br>This page uses <a href="https://getbootstrap.com">Bootstrap</a>, <a href="https://jquery.com/">jQuery</a>, <a href="https://github.com/axios/axios">Axios</a> and the <a href="https://github.com/r-spacex/SpaceX-API">Space X Missions API</a>.<br>Stock images from <a href="https://unsplash.com/">Unsplash</a>.</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+
+</html>
