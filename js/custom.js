@@ -39,19 +39,28 @@ function holeDaten() {
 }
 
 function zeichneSelectboxen(element) {
-let selectboxen = [];
-
-for (let i of launchliste) {
-    let tempElement = i[element];
-    selectboxen.push(tempElement);
-}
-
-let reduzierteWerte = new Set(selectboxen);
-let optionen = '';
-for (let i of reduzierteWerte) {
-    optionen += `<option value="${i}">${i}</option>`;
-}
-document.querySelector(('#' + element)).innerHTML += optionen;
+    let selectboxen = [];
+    
+    for (let i of launchliste) {
+        let tempElement = i[element];
+        selectboxen.push(tempElement);
+    }
+    
+    let reduzierteWerte = new Set(selectboxen);
+    
+    let optionen = '';
+    
+    let d = new Date();
+    let y = d.getFullYear();
+    
+    for (let i of reduzierteWerte) {
+        if (element == 'startjahr' && i == y-1) {
+            optionen += `<option value="${i}" selected>${i}</option>`;
+         } else {
+            optionen += `<option value="${i}">${i}</option>`;
+         }
+    }
+    document.querySelector(('#' + element)).innerHTML += optionen;
 }
 
 function zeichnetabelle() {
@@ -138,7 +147,7 @@ function zeichnetabelle() {
     }
 
     let gesamtTonnen = (gesamtKg/1000).toFixed(2);
-    zusammenfassung = `A total of ${gesamtMissionen} missions were launched. ${erfolge} of them were successful, ${misserfolge} were unsuccessful. ${gesamtFracht} payloads with a sum total weight of ${gesamtTonnen} tons were transported into the cosmos.`;
+    zusammenfassung = `A total of ${gesamtMissionen} missions were launched. ${erfolge} of them were successful, ${misserfolge} were unsuccessful. ${gesamtFracht} payloads with a sum total mass of ${gesamtTonnen} metric tons were transported into the cosmos.`;
 
     if (listeGefiltert.length == 0) {
         eintrag = `
